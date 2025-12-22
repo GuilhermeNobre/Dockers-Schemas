@@ -1,0 +1,18 @@
+# src/docker-compose.yml
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379" # Redis server port
+    volumes:
+      - ./redis/config:/usr/local/etc/redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+
+  redis-insight:
+    image: redis/redisinsight:latest
+    container_name: redis-insight
+    ports:
+      - "5540:5540" # RedisInsight Web UI port
+    depends_on:
+      - redis
