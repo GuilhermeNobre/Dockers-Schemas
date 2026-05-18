@@ -1,0 +1,15 @@
+services:
+  neko:
+    image: m1k1o/neko:google-chrome
+    container_name: neko-browser
+    ports:
+      - "8080:8080"
+      - "52000-52100:52000-52100/udp"
+    environment:
+      - NEKO_PASSWORD=user123       # senha para entrar
+      - NEKO_PASSWORD_ADMIN=admin123 # senha de admin (controle de tela)
+      - NEKO_EPR=52000-52100
+    shm_size: 2gb
+    restart: unless-stopped
+    cap_add:
+      - SYS_ADMIN
